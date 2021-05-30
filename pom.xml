@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.mizhousoft</groupId>
+		<artifactId>mizhousoft</artifactId>
+		<version>1.0.5</version>
+	</parent>
+
+	<groupId>com.mizhousoft.sdk</groupId>
+	<artifactId>bytedance-sdk</artifactId>
+	<version>1.0.0</version>
+	<packaging>pom</packaging>
+
+	<name>bytedance-sdk</name>
+	<description>Byte Dance SDK</description>
+
+	<properties>
+		<commons.version>1.0.1</commons.version>
+		<bytedance.version>1.0.0</bytedance.version>
+	</properties>
+
+	<modules>
+		<module>bytedance-common</module>
+		<module>bytedance-miniapp</module>
+		<module>bytedance-pay</module>
+		<module>bytedance-all</module>
+	</modules>
+
+</project>
