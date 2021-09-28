@@ -21,14 +21,6 @@ public class BdJscode2SessionResult
 	@JsonProperty("unionid")
 	private String unionid;
 
-	// 错误码
-	@JsonProperty("errcode")
-	private int errcode;
-
-	// 错误信息
-	@JsonProperty("errmsg")
-	private String errmsg;
-
 	/**
 	 * 获取sessionKey
 	 * 
@@ -87,45 +79,5 @@ public class BdJscode2SessionResult
 	public void setUnionid(String unionid)
 	{
 		this.unionid = unionid;
-	}
-
-	/**
-	 * 获取errcode
-	 * 
-	 * @return
-	 */
-	public int getErrcode()
-	{
-		return errcode;
-	}
-
-	/**
-	 * 设置errcode
-	 * 
-	 * @param errcode
-	 */
-	public void setErrcode(int errcode)
-	{
-		this.errcode = errcode;
-	}
-
-	/**
-	 * 获取errmsg
-	 * 
-	 * @return
-	 */
-	public String getErrmsg()
-	{
-		return errmsg;
-	}
-
-	/**
-	 * 设置errmsg
-	 * 
-	 * @param errmsg
-	 */
-	public void setErrmsg(String errmsg)
-	{
-		this.errmsg = errmsg;
 	}
 }

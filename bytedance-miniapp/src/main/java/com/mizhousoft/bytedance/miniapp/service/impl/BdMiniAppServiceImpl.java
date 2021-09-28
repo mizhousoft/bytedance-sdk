@@ -1,8 +1,11 @@
 package com.mizhousoft.bytedance.miniapp.service.impl;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.mizhousoft.bytedance.common.ByteDanceException;
 import com.mizhousoft.bytedance.miniapp.config.BdMiniAppConfig;
+import com.mizhousoft.bytedance.miniapp.model.BdGenericResponse;
 import com.mizhousoft.bytedance.miniapp.model.BdJscode2SessionResult;
+import com.mizhousoft.bytedance.miniapp.request.BdLoginRequest;
 import com.mizhousoft.bytedance.miniapp.service.BdMiniAppService;
 import com.mizhousoft.commons.json.JSONException;
 import com.mizhousoft.commons.json.JSONUtils;
@@ -36,13 +39,25 @@ public class BdMiniAppServiceImpl implements BdMiniAppService
 	@Override
 	public BdJscode2SessionResult jsCode2Session(String jsCode) throws ByteDanceException
 	{
-		String url = String.format(JSCODE_TO_SESSION_URL, config.getAppId(), config.getAppSecret(), jsCode);
-
-		String responseContent = restClientService.getForObject(url, String.class);
+		BdLoginRequest request = new BdLoginRequest();
+		request.setAppid(config.getAppId());
+		request.setSecret(config.getAppSecret());
+		request.setCode(jsCode);
 
 		try
 		{
-			return JSONUtils.parse(responseContent, BdJscode2SessionResult.class);
+			String responseContent = restClientService.postForObject(JSCODE_TO_SESSION_URL, request, String.class);
+
+			BdGenericResponse<BdJscode2SessionResult> resp = JSONUtils.parse(responseContent,
+			        new TypeReference<BdGenericResponse<BdJscode2SessionResult>>()
+			        {
+			        });
+			if (0 != resp.getStatusCode())
+			{
+				throw new ByteDanceException("Fetch session failed, code is " + resp.getStatusCode() + '.');
+			}
+
+			return resp.getData();
 		}
 		catch (JSONException e)
 		{

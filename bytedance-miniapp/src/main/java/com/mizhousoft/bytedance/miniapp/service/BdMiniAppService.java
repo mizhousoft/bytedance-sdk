@@ -11,7 +11,7 @@ import com.mizhousoft.bytedance.miniapp.model.BdJscode2SessionResult;
 public interface BdMiniAppService
 {
 	// auth.code2Session
-	String JSCODE_TO_SESSION_URL = "https://developer.toutiao.com/api/apps/jscode2session?appid=%s&secret=%s&code=%s";
+	String JSCODE_TO_SESSION_URL = "https://developer.toutiao.com/api/apps/v2/jscode2session";
 
 	/**
 	 * 获取字节跳动APP ID
