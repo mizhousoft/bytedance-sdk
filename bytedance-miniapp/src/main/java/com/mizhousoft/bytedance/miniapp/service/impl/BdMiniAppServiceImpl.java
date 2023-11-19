@@ -9,7 +9,9 @@ import com.mizhousoft.bytedance.miniapp.request.BdLoginRequest;
 import com.mizhousoft.bytedance.miniapp.service.BdMiniAppService;
 import com.mizhousoft.commons.json.JSONException;
 import com.mizhousoft.commons.json.JSONUtils;
-import com.mizhousoft.commons.restclient.service.RestClientService;
+
+import kong.unirest.core.Unirest;
+import kong.unirest.core.UnirestException;
 
 /**
  * 字节跳动小程序服务
@@ -20,9 +22,6 @@ public class BdMiniAppServiceImpl implements BdMiniAppService
 {
 	// 配置
 	private BdMiniAppConfig config;
-
-	// REST服务
-	private RestClientService restClientService;
 
 	/**
 	 * {@inheritDoc}
@@ -46,7 +45,7 @@ public class BdMiniAppServiceImpl implements BdMiniAppService
 
 		try
 		{
-			String responseContent = restClientService.postForObject(JSCODE_TO_SESSION_URL, request, String.class);
+			String responseContent = Unirest.post(JSCODE_TO_SESSION_URL).body(request).asString().getBody();
 
 			BdGenericResponse<BdJscode2SessionResult> resp = JSONUtils.parse(responseContent,
 			        new TypeReference<BdGenericResponse<BdJscode2SessionResult>>()
@@ -58,6 +57,10 @@ public class BdMiniAppServiceImpl implements BdMiniAppService
 			}
 
 			return resp.getData();
+		}
+		catch (UnirestException e)
+		{
+			throw new ByteDanceException(e.getMessage(), e);
 		}
 		catch (JSONException e)
 		{
@@ -73,15 +76,5 @@ public class BdMiniAppServiceImpl implements BdMiniAppService
 	public void setConfig(BdMiniAppConfig config)
 	{
 		this.config = config;
-	}
-
-	/**
-	 * 设置restClientService
-	 * 
-	 * @param restClientService
-	 */
-	public void setRestClientService(RestClientService restClientService)
-	{
-		this.restClientService = restClientService;
 	}
 }
