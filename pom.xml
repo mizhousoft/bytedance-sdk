@@ -6,20 +6,20 @@
 	<parent>
 		<groupId>com.mizhousoft</groupId>
 		<artifactId>mizhousoft-bom</artifactId>
-		<version>2.0.3</version>
+		<version>2.0.4-SNAPSHOT</version>
 	</parent>
 
 	<groupId>com.mizhousoft.sdk</groupId>
 	<artifactId>bytedance-sdk</artifactId>
-	<version>2.0.3</version>
+	<version>2.0.4-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>bytedance-sdk</name>
 	<description>Byte Dance SDK</description>
 
 	<properties>
-		<commons.version>2.0.3</commons.version>
-		<bytedance.version>2.0.3</bytedance.version>
+		<commons.version>2.0.4-SNAPSHOT</commons.version>
+		<bytedance.version>2.0.4-SNAPSHOT</bytedance.version>
 	</properties>
 
 	<modules>
